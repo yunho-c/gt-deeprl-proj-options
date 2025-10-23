@@ -34,3 +34,9 @@ gt-deeprl-proj-options/
 - Split `envs/` into `mujoco_playground/`, `wrappers/` (reward shaping, normalization), and `benchmarks/` for task registries.
 - Model reproducible runs as `experiments/<date>_<task>_<agent>/` with symlinks into `artifacts/` for checkpoints and summaries.
 - Use Pixi tasks to orchestrate workflows: `train` launches `python experiments/train.py`, `eval` reports metrics, `plot` executes notebooks headlessly.
+
+## Implemented Files
+- `envs/dm_control.py`: loads MuJoCo Playground DM Control Suite envs and applies nested overrides for quick experimentation.
+- `agents/brax/ppo_runner.py`: wraps the notebook's PPO training loop in a reusable function that logs progress and exposes rollouts.
+- `experiments/train.py`: CLI driver that reads a TOML config, spins up the environment, runs Brax PPO, and optionally evaluates the trained policy.
+- `configs/mujoco/cartpole_balance.toml`: sample config mirroring the notebook setup with smaller defaults for fast local sanity checks.

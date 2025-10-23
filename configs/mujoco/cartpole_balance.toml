@@ -1,0 +1,10 @@
+# CartpoleBalance experiment inspired by dm_control_suite notebook
+env_name = "CartpoleBalance"
+seed = 0
+progress_interval = 200000
+evaluation_episodes = 1
+
+[rl]
+num_timesteps = 1_000_000
+num_envs = 512
+batch_size = 256

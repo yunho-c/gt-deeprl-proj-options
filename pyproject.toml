@@ -7,6 +7,9 @@ dependencies = [
     "torch>=2.0,<2.5",
     "rsl-rl-lib>=2.3,<3.0",
     "playground>=0.0.1",
+    "brax>=0.13,<0.14",
+    "jax>=0.8,<0.9",
+    "ml-collections>=1.0.0,<2.0",
 ]
 
 [tool.pixi.workspace]
@@ -21,3 +24,6 @@ python = ">=3.11,<3.13"
 playground = "*"
 rsl-rl-lib = "*"
 torch = "*"
+brax = "*"
+jax = "*"
+ml-collections = "*"
