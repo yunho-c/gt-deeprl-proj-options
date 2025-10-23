@@ -2,6 +2,12 @@
 name = "gt-deeprl-proj-options"
 version = "0.0.1"
 description = "Deep reinforcement learning project for GT CS 8803 (Deep RL) - Options algorithms."
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "torch>=2.0,<2.5",
+    "rsl-rl-lib>=2.3,<3.0",
+    "playground>=0.0.1",
+]
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]
