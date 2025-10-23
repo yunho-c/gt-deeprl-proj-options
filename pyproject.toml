@@ -3,6 +3,7 @@ name = "gt-deeprl-proj-options"
 version = "0.0.1"
 description = "Deep reinforcement learning project for GT CS 8803 (Deep RL) - Options algorithms."
 requires-python = ">=3.11,<3.13"
+dependencies = ["mujoco-mjx>=3.3.7,<4", "warp-lang>=1.9.1,<2"]
 # dependencies = [
 #     "torch>=2.0,<3.0",
 #     "rsl-rl-lib>=3.0,<4.0",
@@ -14,16 +15,18 @@ requires-python = ">=3.11,<3.13"
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]
-platforms = ["win-64", "osx-arm64", "osx-64", "linux-64"]
+platforms = ["win-64", "osx-arm64", "linux-64"]
+[tool.pixi.pypi-options]
+extra-index-urls = ["https://storage.googleapis.com/jax-releases/jax_cuda_releases.html"]
 
 [tool.pixi.dependencies]
 # python = ">=3.11,<3.14"
 python = ">=3.11,<3.13"
 
 [tool.pixi.pypi-dependencies]
+brax = "*"
+jax = { version = "*", extras = ["cuda13"] }
+ml-collections = "*"
 playground = "*"
 rsl-rl-lib = "*"
 torch = "*"
-brax = "*"
-jax = "*"
-ml-collections = "*"
