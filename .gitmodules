@@ -1,0 +1,6 @@
+[submodule "References/rsl_rl"]
+	path = References/rsl_rl
+	url = https://github.com/yunho-c/rsl_rl
+[submodule "References/mujoco_playground"]
+	path = References/mujoco_playground
+	url = https://github.com/google-deepmind/mujoco_playground
