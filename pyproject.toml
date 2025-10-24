@@ -2,7 +2,8 @@
 name = "gt-deeprl-proj-options"
 version = "0.0.1"
 description = "Deep reinforcement learning project for GT CS 8803 (Deep RL) - Options algorithms."
-requires-python = ">=3.11,<3.13"
+# requires-python = ">=3.11,<3.13"
+requires-python = ">=3.11,<3.12" # REQUIRED
 dependencies = ["mujoco-mjx>=3.3.7,<4", "warp-lang>=1.9.1,<2"]
 # dependencies = [
 #     "torch>=2.0,<3.0",
@@ -13,20 +14,33 @@ dependencies = ["mujoco-mjx>=3.3.7,<4", "warp-lang>=1.9.1,<2"]
 #     "ml-collections>=1.0.0,<2.0",
 # ]
 
+# [system-requirements]
+# cuda = "12"
+
 [tool.pixi.workspace]
-channels = ["conda-forge"]
-platforms = ["win-64", "osx-arm64", "linux-64"]
+# channels = ["nvidia", "pytorch", "conda-forge"] # NOTE: didn't seem to work; torch import error
+channels = ["pytorch", "nvidia", "conda-forge"]
+# channels = ["nvidia", "conda-forge"]
+# platforms = ["win-64", "osx-arm64", "linux-64"]
+platforms = ["linux-64"]
 [tool.pixi.pypi-options]
 extra-index-urls = ["https://storage.googleapis.com/jax-releases/jax_cuda_releases.html"]
 
 [tool.pixi.dependencies]
 # python = ">=3.11,<3.14"
-python = ">=3.11,<3.13"
+# python = ">=3.11,<3.13"
+python = ">=3.11,<3.12" # REQUIRED
+# pytorch = "*"
+# pytorch-cuda = { version = ">=12", channel = "pytorch" }
+# pytorch-cuda = { version = ">=12.8", channel = "pytorch" }
+# torchvision = "*"
 
 [tool.pixi.pypi-dependencies]
 brax = "*"
-jax = { version = "*", extras = ["cuda13"] }
+# jax = { version = "*", extras = ["cuda13"] }
+jax = { version = "*", extras = ["cuda12"] } # py312; REQUIRED
 ml-collections = "*"
 playground = "*"
-rsl-rl-lib = "*"
+# rsl-rl-lib = "*"
+rsl-rl-lib = ">=2.3.3,<3" # https://github.com/google-deepmind/mujoco_playground/issues/217 # https://github.com/google-deepmind/mujoco_playground/issues/205
 torch = "*"
