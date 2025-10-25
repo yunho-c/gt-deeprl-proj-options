@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import functools
+import inspect
 import logging
 from dataclasses import dataclass
 from time import perf_counter
 from typing import Any, Callable, Dict, Iterable, Optional
 
 import jax
-from brax.training.agents import ppo
 from brax.training.agents.ppo import networks as ppo_networks
 from jax import numpy as jnp
 from mujoco_playground import wrapper
@@ -19,6 +19,26 @@ from envs import DMControlEnvConfig, apply_overrides, load_environment
 
 
 LOGGER = logging.getLogger(__name__)
+
+try:  # Prefer newer Brax API layout.
+    from brax.training.agents.ppo.train import train as _brax_ppo_train
+except ImportError:  # Fallback for older Brax releases.
+    from brax.training.agents import ppo as _brax_ppo_module
+
+    if not hasattr(_brax_ppo_module, "train"):
+        raise ImportError(
+            "Unable to locate Brax PPO training entry point. "
+            "Please ensure brax>=0.12.1 is installed."
+        ) from None
+    _brax_ppo_train = _brax_ppo_module.train
+
+_BRAx_PPO_TRAIN_PARAMS = inspect.signature(_brax_ppo_train).parameters
+if "seed" in _BRAx_PPO_TRAIN_PARAMS:
+    _BRAx_PPO_SEED_ARG = "seed"
+elif "random_seed" in _BRAx_PPO_TRAIN_PARAMS:
+    _BRAx_PPO_SEED_ARG = "random_seed"
+else:
+    _BRAx_PPO_SEED_ARG = None
 
 
 @dataclass
@@ -83,14 +103,15 @@ def train_dm_control_ppo(
         network_factory = functools.partial(
             ppo_networks.make_ppo_networks, **dict(network_overrides)
         )
+    if _BRAx_PPO_SEED_ARG:
+        training_kwargs[_BRAx_PPO_SEED_ARG] = seed
 
     progress_fn = _build_progress_logger(progress_interval)
     train_fn = functools.partial(
-        ppo.train,
+        _brax_ppo_train,
         **training_kwargs,
         network_factory=network_factory,
         progress_fn=progress_fn,
-        random_seed=seed,
     )
 
     start_time = perf_counter()

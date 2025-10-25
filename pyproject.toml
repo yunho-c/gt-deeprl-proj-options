@@ -4,7 +4,7 @@ version = "0.0.1"
 description = "Deep reinforcement learning project for GT CS 8803 (Deep RL) - Options algorithms."
 # requires-python = ">=3.11,<3.13"
 requires-python = ">=3.11,<3.12" # REQUIRED
-dependencies = ["mujoco-mjx>=3.3.7,<4", "warp-lang>=1.9.1,<2"]
+dependencies = ["mujoco-mjx>=3.3.7,<4", "warp-lang>=1.9.1,<2", "matplotlib>=3.10.7,<4", "mediapy>=1.2.4,<2"]
 # dependencies = [
 #     "torch>=2.0,<3.0",
 #     "rsl-rl-lib>=3.0,<4.0",
