@@ -4,3 +4,10 @@
 [submodule "References/mujoco_playground"]
 	path = References/mujoco_playground
 	url = https://github.com/google-deepmind/mujoco_playground
+[submodule "References/DeepRL-Main"]
+	path = References/DeepRL-Main
+	url = https://github.com/yunho-c/DeepRL
+[submodule "References/DeepRL-DAC"]
+	path = References/DeepRL-DAC
+	url = https://github.com/yunho-c/DeepRL
+	branch = DAC
